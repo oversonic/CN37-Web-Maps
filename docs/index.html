@@ -144,6 +144,16 @@
   .fiber-dot{width:14px;height:14px;border-radius:3px;background:#f0922e;flex-shrink:0}
   .jb-icon{width:14px;height:14px;background:#f0922e;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)}
   .cab-icon{width:18px;height:18px;background:#2d4a8a;border:2.5px solid #fff;border-radius:4px;box-shadow:0 1px 5px rgba(0,0,0,.45)}
+  .zone-label{display:flex;flex-direction:column;align-items:center;transform:translate(-50%,-50%);
+    background:rgba(20,28,24,.76);color:#fbfcfa;border-radius:8px;padding:4px 8px;
+    white-space:nowrap;pointer-events:none;font-family:"IBM Plex Sans Thai",sans-serif;
+    box-shadow:0 1px 6px rgba(0,0,0,.28);backdrop-filter:blur(3px)}
+  .zl-n{font-family:"Anuphan",sans-serif;font-weight:700;font-size:13px;line-height:1.2}
+  .zl-info{font-size:10px;opacity:.72;margin-top:1px;letter-spacing:.2px}
+  .leaflet-tooltip.zone-tip{background:rgba(20,28,24,.9);color:#fbfcfa;border:none;border-radius:9px;
+    font-size:12px;padding:7px 11px;box-shadow:0 2px 10px rgba(0,0,0,.3);line-height:1.55;
+    font-family:"IBM Plex Sans Thai",sans-serif}
+  .leaflet-tooltip.zone-tip::before{display:none}
 </style>
 </head>
 <body>
@@ -215,6 +225,16 @@
         <div class="cam-toggle" id="fiberToggle">
           <div class="ct-left"><span class="fiber-dot"></span><span class="ct-lab">สาย Fiber + JB</span></div>
           <span class="cam-count">16<small>จุด</small></span>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-h">เขตพื้นที่</div>
+        <div class="cam-toggle" id="zoneToggle">
+          <div class="ct-left">
+            <span class="ct-swatch" style="background:conic-gradient(#c8b44a 0% 50%,#b86060 50% 100%);border-radius:3px"></span>
+            <span class="ct-lab">แสดงเขต 10 เขต</span>
+          </div>
+          <span class="cam-count">10<small>เขต</small></span>
         </div>
       </div>
     </aside>
@@ -2766,6 +2786,7 @@
 
       </div>
       <div id="cam-html-layer"></div>
+      <div id="zone-label-layer" style="position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;display:none"></div>
       <div id="fiber-html-layer">
         <svg id="fiber-svg" xmlns="http://www.w3.org/2000/svg"></svg>
       </div>
@@ -3013,6 +3034,114 @@
       document.getElementById('camToggle').style.opacity = visible ? 1 : .4;
     });
   }
+
+  // ── Zone boundaries layer ────────────────────────────────────
+  function renderZones(){
+    // SVG → GPS similarity transform.
+    // Source SVG tie points (inline y + 27):
+    //   (201, 878) → GPS (13.9180573, 100.5866030)
+    //   (4558, 924) → GPS (13.9143259, 100.5952891)
+    // dx=4357, dy=46
+    // a=(dlat·dx+dlon·dy)/(dx²+dy²) = -8.35024e-7
+    // b=(dlat·dy-dlon·dx)/(dx²+dy²) = -2.002355e-6
+    const a=-8.35024e-7, b=-2.002355e-6, tx=13.9199832, ty=100.5869337;
+    function s2ll(x,y){ return L.latLng(a*x+b*y+tx, -b*x+a*y+ty); }
+    function parsePts(s){
+      return s.split(' ').map(p=>{ const[x,y]=p.split(',').map(Number); return s2ll(x,y); });
+    }
+
+    // Zone polygon points are in the source SVG coordinate system.
+    // Zone info cross-referenced from <g id="zone"> + <g id="discription2"> in source SVG.
+    const ZONES=[
+      {n:1,  fill:'#c8b44a', stroke:'#9a882e',
+       pts:'935.5,836.402 229.5,838.421 229.5,686.063 935.5,679',
+       units:'8/1–8/45',    sois:'ซอย 1-3, 5-6',  count:45, floors:2},
+      {n:2,  fill:'#c07878', stroke:'#944040',
+       pts:'1569.5,839.5 939.5,839.5 939.5,679 1569.5,667',
+       units:'8/46–8/86',   sois:'ซอย 7-10',       count:41, floors:2},
+      {n:3,  fill:'#c8b44a', stroke:'#9a882e',
+       pts:'2269.5,834 1573.5,835 1573.5,666 2269.5,656',
+       units:'8/87–8/138',  sois:'ซอย 11-15',      count:52, floors:2},
+      {n:4,  fill:'#c07878', stroke:'#944040',
+       pts:'3211.001,845.5 2662.5,845.5 2662.5,650.416 3210.084,643.918',
+       units:'8/139–8/166', sois:'ซอย 16-19',      count:28, floors:2},
+      {n:5,  fill:'#c8b44a', stroke:'#9a882e',
+       pts:'4014.5,834 3214.5,844 3214.5,641 4014.5,625',
+       units:'8/167–8/206', sois:'ซอย 20-24',      count:40, floors:3},
+      {n:6,  fill:'#c07878', stroke:'#944040',
+       pts:'4560.75,823 4017.5,834 4017.5,624 4580.625,616',
+       units:'8/207–8/234', sois:'ซอย 25-28',      count:28, floors:2},
+      {n:7,  fill:'#c8b44a', stroke:'#9a882e',
+       pts:'4406.5,962 2352.5,970 2352.5,899 4406.5,879',
+       units:'8/235–8/280', sois:'แถวหลัง',         count:46, floors:3},
+      {n:8,  fill:'#8844c0', stroke:'#6028a0',
+       pts:'2296.5,968 1380.49,971 1379.793,961 255.5,960 255.5,902.5 2296.5,902.5',
+       units:'8/281–8/348', sois:'แถวหน้า',         count:68, floors:3},
+      {n:9,  fill:'#c8b44a', stroke:'#9a882e',
+       pts:'1370,1121 257,1123 206,964 1377,965',
+       units:'8/349–8/423', sois:'ซอย 4/1-4/2',    count:75, floors:3},
+      {n:10, fill:'#c07878', stroke:'#944040',
+       pts:'258,1127 1394,1125 1382,1271 307,1276',
+       units:'8/424–8/495', sois:'ซอย 4/3-4/4',    count:72, floors:3},
+    ];
+
+    const zoneGroup = L.layerGroup();
+    const labelLayer = document.getElementById('zone-label-layer');
+    const labelEls = [];
+
+    ZONES.forEach(z=>{
+      const lls = parsePts(z.pts);
+      const poly = L.polygon(lls,{
+        color:z.stroke, weight:2, fillColor:z.fill, fillOpacity:0.18, opacity:0.85
+      });
+      poly.bindTooltip(
+        `<b style="font-family:'Anuphan',sans-serif;font-size:14px">เขต ${z.n}</b><br>`+
+        `${z.units}<br>${z.sois}<br><b>${z.count}</b> หลัง · ${z.floors} ชั้น`,
+        {sticky:true, className:'zone-tip', opacity:1}
+      );
+      zoneGroup.addLayer(poly);
+
+      // HTML label above SVG overlay (z-index:3), positioned manually
+      const center = poly.getBounds().getCenter();
+      const el = document.createElement('div');
+      el.className = 'zone-label';
+      el.style.cssText = 'position:absolute;';
+      el.innerHTML =
+        `<span class="zl-n">เขต ${z.n}</span>`+
+        `<span class="zl-info">${z.count} หลัง</span>`;
+      labelLayer.appendChild(el);
+      labelEls.push({el, ll: center});
+    });
+
+    function updateZoneLabelPos(){
+      labelEls.forEach(({el, ll})=>{
+        const p = map.latLngToContainerPoint(ll);
+        el.style.left = p.x + 'px';
+        el.style.top  = p.y + 'px';
+      });
+    }
+    map.on('move zoom viewreset', updateZoneLabelPos);
+    // Chain into _updateCamPos so rotation (setBearing) also updates labels
+    const _prevUpdate = window._updateCamPos;
+    window._updateCamPos = ()=>{ _prevUpdate&&_prevUpdate(); updateZoneLabelPos(); };
+
+    let visible=false;
+    const tog=document.getElementById('zoneToggle');
+    tog.style.opacity=.4;
+    tog.addEventListener('click',()=>{
+      visible=!visible;
+      if(visible){
+        zoneGroup.addTo(map);
+        labelLayer.style.display='';
+        updateZoneLabelPos();
+      } else {
+        zoneGroup.remove();
+        labelLayer.style.display='none';
+      }
+      tog.style.opacity=visible?1:.4;
+    });
+  }
+  renderZones();
 
   // ── Fiber & Junction Box layer ─────────────────────────────────
   function renderFiber(){

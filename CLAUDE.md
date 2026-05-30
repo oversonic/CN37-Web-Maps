@@ -8,23 +8,31 @@ Interactive map viewer for the CN37 housing project (โครงการ CN37)
 
 ## Files
 
-| File | Purpose |
-| --- | --- |
-| `docs/index.html` | **Primary app** — fully self-contained, no build step, no external files |
-| `CN37_masterplan.html` | Legacy version (loads SVG via fetch, kept for reference) |
-| `CN37_MasterPlan3_cctv.svg` | Source SVG from Adobe Illustrator (not loaded at runtime) |
-| `CNfiber_coordinates_v2.csv` | GPS coordinates of all 32 CCTV cameras (source of truth) |
-| `CCTV_DESIGN.md` | CCTV & fiber infrastructure design — topology, zones, BOM, VLAN |
-| `COST_ESTIMATE.md` | Equipment price estimate (ราคาตลาดไทย 2025, ไม่รวมค่าแรง) |
-| `CN37_CCTV_Design.docx` | Word document สรุปการออกแบบ CCTV ครบทุกหัวข้อ |
+```text
+docs/
+  index.html              Primary app — fully self-contained, no build step, no external files
+source/
+  CN37_masterplan.html    Legacy version (loads SVG via fetch, kept for reference)
+  CN37_MasterPlan3_cctv.svg  Source SVG from Adobe Illustrator (not loaded at runtime)
+  CNfiber_coordinates_v2.csv GPS coordinates of all 32 CCTV cameras (source of truth)
+design/
+  CCTV_DESIGN.md          CCTV & fiber infrastructure design — topology, zones, BOM, VLAN
+  COST_ESTIMATE.md        Equipment price estimate (ราคาตลาดไทย 2025, ไม่รวมค่าแรง)
+  ZONE_DIVISION.md        Zone boundary data — 10 เขต, unit ranges, soi groups
+  CN37_CCTV_Design.docx   Word document สรุปการออกแบบ CCTV ครบทุกหัวข้อ
+  note.md                 Miscellaneous notes
+screenshots/
+  *.png                   Playwright screenshots from development sessions
+```
 
 ## Running
 
 `docs/index.html` opens directly as `file://` — no server needed (SVG is inline).
 
-For the legacy `CN37_masterplan.html`, a static server is required:
+For the legacy `source/CN37_masterplan.html`, run a static server from the `source/` directory:
 
 ```
+cd source
 python -m http.server
 ```
 
@@ -114,6 +122,8 @@ Removed at build time: `spece`, `line2Outline`, `EleT`, `ELeLine`, `EleTxt` (all
 
 ## CCTV Installation Design
 
-See [`CCTV_DESIGN.md`](CCTV_DESIGN.md) — fiber backbone, junction box layout, BOM, per-pole power, and VLAN design.
+See [`design/CCTV_DESIGN.md`](design/CCTV_DESIGN.md) — fiber backbone, junction box layout, BOM, per-pole power, and VLAN design.
 
-See [`COST_ESTIMATE.md`](COST_ESTIMATE.md) — equipment price estimate breakdown by category (ราคาตลาดไทย 2025, ไม่รวมค่าแรงติดตั้ง)
+See [`design/COST_ESTIMATE.md`](design/COST_ESTIMATE.md) — equipment price estimate breakdown by category (ราคาตลาดไทย 2025, ไม่รวมค่าแรงติดตั้ง)
+
+See [`design/ZONE_DIVISION.md`](design/ZONE_DIVISION.md) — 10 zone boundaries, unit ranges, soi groupings, and house counts.
