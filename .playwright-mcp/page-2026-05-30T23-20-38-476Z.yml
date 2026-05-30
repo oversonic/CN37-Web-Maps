@@ -1,0 +1,630 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - button "ยุบเมนู" [active] [ref=e3] [cursor=pointer]:
+      - img [ref=e131]
+    - generic [ref=e5]:
+      - generic "ทิศเหนือ" [ref=e6]:
+        - img [ref=e7]
+      - generic [ref=e10]:
+        - heading "ผังหมู่บ้านจัดสรร The Connect 37" [level=1] [ref=e11]
+        - generic [ref=e12]: CN-fiber · vector master plan
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: "5"
+        - generic [ref=e16]: โซน
+      - generic [ref=e17]:
+        - generic [ref=e18]: "495"
+        - generic [ref=e19]: หลัง
+      - generic [ref=e20]:
+        - generic [ref=e21]: "28"
+        - generic [ref=e22]: ซอย
+      - generic [ref=e23]:
+        - generic [ref=e24]: "2"
+        - generic [ref=e25]: ป้อม รปภ.
+  - generic [ref=e26]:
+    - complementary [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]: ประเภทที่อยู่อาศัย
+        - generic [ref=e32] [cursor=pointer]: ทาวน์โฮม จอดรถ 1 คัน
+        - generic [ref=e35] [cursor=pointer]: ทาวน์โฮม จอดรถ 2 คัน
+        - generic [ref=e38] [cursor=pointer]: บ้านแฝด 2 ชั้น (เล็ก)
+        - generic [ref=e41] [cursor=pointer]: บ้านแฝด 2 ชั้น (ใหญ่)
+        - generic [ref=e44] [cursor=pointer]: สำนักงานนิติบุคคล
+        - generic [ref=e47] [cursor=pointer]: ป้อม รปภ.
+      - generic [ref=e48]:
+        - generic [ref=e49]: บ้านทั้งหมด
+        - generic [ref=e50]: 495หลัง
+      - generic [ref=e51]:
+        - generic [ref=e52]: การแสดงผล
+        - generic [ref=e53] [cursor=pointer]:
+          - generic [ref=e56]: แผนที่พื้นหลัง
+          - generic [ref=e57]: เปิด
+        - generic [ref=e58] [cursor=pointer]:
+          - generic [ref=e61]: พื้นขาวแผนผัง
+          - generic [ref=e62]: เปิด
+      - generic [ref=e63]:
+        - generic [ref=e64]: กล้องวงจรปิด
+        - generic [ref=e65] [cursor=pointer]:
+          - generic [ref=e68]: แสดงตำแหน่งกล้อง
+          - generic [ref=e69]: 32ตัว
+      - generic [ref=e70]:
+        - generic [ref=e71]: Fiber & Junction Box
+        - generic [ref=e72]:
+          - generic [ref=e73]: Backbone
+          - generic [ref=e75]: Fiber
+          - generic [ref=e77]:
+            - img [ref=e78]
+            - text: LAN
+        - generic [ref=e79] [cursor=pointer]:
+          - generic [ref=e82]: สาย Fiber + JB
+          - generic [ref=e83]: 16จุด
+      - generic [ref=e84]:
+        - generic [ref=e85]: เขตพื้นที่
+        - generic [ref=e86] [cursor=pointer]:
+          - generic [ref=e89]: แสดงเขต 10 เขต
+          - generic [ref=e90]: 10เขต
+    - generic [ref=e91]:
+      - generic [ref=e92]:
+        - generic:
+          - link "Rotate map" [ref=e94] [cursor=pointer]:
+            - /url: "#"
+          - generic:
+            - button "Layers" [ref=e97] [cursor=pointer]
+            - generic [ref=e98]:
+              - link "Leaflet" [ref=e99] [cursor=pointer]:
+                - /url: https://leafletjs.com
+                - img [ref=e100]
+                - text: Leaflet
+              - text: "| ©"
+              - link "OpenStreetMap" [ref=e104] [cursor=pointer]:
+                - /url: https://www.openstreetmap.org/copyright
+      - generic:
+        - img:
+          - generic:
+            - generic: "5"
+            - generic: "6"
+            - generic: "15"
+            - generic: "14"
+            - generic: "13"
+            - generic: "12"
+            - generic: "11"
+            - generic: "16"
+            - generic: "17"
+            - generic: "18"
+            - generic: "19"
+            - generic: "20"
+            - generic: "25"
+            - generic: "24"
+            - generic: "23"
+            - generic: "22"
+            - generic: "21"
+            - generic: "36"
+            - generic: "37"
+            - generic: "38"
+            - generic: "39"
+            - generic: "40"
+            - generic: "45"
+            - generic: "44"
+            - generic: "43"
+            - generic: "42"
+            - generic: "41"
+            - generic: "46"
+            - generic: "47"
+            - generic: "48"
+            - generic: "49"
+            - generic: "50"
+            - generic: "55"
+            - generic: "54"
+            - generic: "53"
+            - generic: "52"
+            - generic: "51"
+            - generic: "66"
+            - generic: "67"
+            - generic: "68"
+            - generic: "69"
+            - generic: "70"
+            - generic: "75"
+            - generic: "74"
+            - generic: "73"
+            - generic: "72"
+            - generic: "71"
+            - generic: "76"
+            - generic: "77"
+            - generic: "78"
+            - generic: "79"
+            - generic: "80"
+            - generic: "85"
+            - generic: "86"
+            - generic: "84"
+            - generic: "83"
+            - generic: "82"
+            - generic: "81"
+            - generic: "100"
+            - generic: "99"
+            - generic: "101"
+            - generic: "102"
+            - generic: "103"
+            - generic: "104"
+            - generic: "109"
+            - generic: "110"
+            - generic: "108"
+            - generic: "107"
+            - generic: "106"
+            - generic: "105"
+            - generic: "112"
+            - generic: "111"
+            - generic: "113"
+            - generic: "114"
+            - generic: "115"
+            - generic: "116"
+            - generic: "121"
+            - generic: "122"
+            - generic: "120"
+            - generic: "119"
+            - generic: "118"
+            - generic: "117"
+            - generic: "124"
+            - generic: "123"
+            - generic: "125"
+            - generic: "126"
+            - generic: "127"
+            - generic: "128"
+            - generic: "133"
+            - generic: "134"
+            - generic: "132"
+            - generic: "131"
+            - generic: "136"
+            - generic: "135"
+            - generic: "137"
+            - generic: "138"
+            - generic: "281"
+            - generic: "282"
+            - generic: "283"
+            - generic: "284"
+            - generic: "285"
+            - generic: "286"
+            - generic: "287"
+            - generic: "288"
+            - generic: "289"
+            - generic: "290"
+            - generic: "291"
+            - generic: "292"
+            - generic: "293"
+            - generic: "294"
+            - generic: "295"
+            - generic: "296"
+            - generic: "297"
+            - generic: "298"
+            - generic: "299"
+            - generic: "300"
+            - generic: "301"
+            - generic: "302"
+            - generic: "303"
+            - generic: "304"
+            - generic: "305"
+            - generic: "306"
+            - generic: "307"
+            - generic: "308"
+            - generic: "309"
+            - generic: "310"
+            - generic: "311"
+            - generic: "312"
+            - generic: "313"
+            - generic: "314"
+            - generic: "315"
+            - generic: "316"
+            - generic: "317"
+            - generic: "318"
+            - generic: "319"
+            - generic: "320"
+            - generic: "321"
+            - generic: "322"
+            - generic: "323"
+            - generic: "324"
+            - generic: "325"
+            - generic: "326"
+            - generic: "327"
+            - generic: "328"
+            - generic: "329"
+            - generic: "330"
+            - generic: "331"
+            - generic: "332"
+            - generic: "333"
+            - generic: "334"
+            - generic: "335"
+            - generic: "336"
+            - generic: "337"
+            - generic: "338"
+            - generic: "339"
+            - generic: "340"
+            - generic: "341"
+            - generic: "342"
+            - generic: "343"
+            - generic: "344"
+            - generic: "345"
+            - generic: "346"
+            - generic: "424"
+            - generic: "425"
+            - generic: "426"
+            - generic: "427"
+            - generic: "428"
+            - generic: "429"
+            - generic: "430"
+            - generic: "431"
+            - generic: "432"
+            - generic: "433"
+            - generic: "434"
+            - generic: "435"
+            - generic: "436"
+            - generic: "437"
+            - generic: "438"
+            - generic: "439"
+            - generic: "440"
+            - generic: "441"
+            - generic: "442"
+            - generic: "443"
+            - generic: "444"
+            - generic: "445"
+            - generic: "446"
+            - generic: "447"
+            - generic: "448"
+            - generic: "449"
+            - generic: "450"
+            - generic: "451"
+            - generic: "452"
+            - generic: "453"
+            - generic: "454"
+            - generic: "455"
+            - generic: "456"
+            - generic: "457"
+            - generic: "458"
+            - generic: "459"
+            - generic: "460"
+            - generic: "461"
+            - generic: "462"
+            - generic: "463"
+            - generic: "464"
+            - generic: "465"
+            - generic: "466"
+            - generic: "467"
+            - generic: "468"
+            - generic: "469"
+            - generic: "470"
+            - generic: "471"
+            - generic: "472"
+            - generic: "473"
+            - generic: "474"
+            - generic: "475"
+            - generic: "476"
+            - generic: "477"
+            - generic: "478"
+            - generic: "479"
+            - generic: "480"
+            - generic: "481"
+            - generic: "482"
+            - generic: "483"
+            - generic: "484"
+            - generic: "485"
+            - generic: "486"
+            - generic: "487"
+            - generic: "488"
+            - generic: "489"
+            - generic: "490"
+            - generic: "491"
+            - generic: "492"
+            - generic: "493"
+            - generic: "494"
+            - generic: "495"
+            - generic: "347"
+            - generic: "348"
+            - generic: "386"
+            - generic: "387"
+            - generic: "388"
+            - generic: "389"
+            - generic: "390"
+            - generic: "391"
+            - generic: "392"
+            - generic: "393"
+            - generic: "394"
+            - generic: "395"
+            - generic: "396"
+            - generic: "397"
+            - generic: "398"
+            - generic: "399"
+            - generic: "400"
+            - generic: "401"
+            - generic: "402"
+            - generic: "403"
+            - generic: "404"
+            - generic: "405"
+            - generic: "406"
+            - generic: "407"
+            - generic: "408"
+            - generic: "409"
+            - generic: "410"
+            - generic: "411"
+            - generic: "412"
+            - generic: "413"
+            - generic: "414"
+            - generic: "415"
+            - generic: "416"
+            - generic: "417"
+            - generic: "418"
+            - generic: "419"
+            - generic: "420"
+            - generic: "421"
+            - generic: "422"
+            - generic: "423"
+            - generic: "385"
+            - generic: "384"
+            - generic: "383"
+            - generic: "382"
+            - generic: "381"
+            - generic: "380"
+            - generic: "379"
+            - generic: "378"
+            - generic: "377"
+            - generic: "376"
+            - generic: "375"
+            - generic: "374"
+            - generic: "373"
+            - generic: "372"
+            - generic: "371"
+            - generic: "370"
+            - generic: "369"
+            - generic: "368"
+            - generic: "367"
+            - generic: "366"
+            - generic: "365"
+            - generic: "364"
+            - generic: "363"
+            - generic: "362"
+            - generic: "361"
+            - generic: "360"
+            - generic: "359"
+            - generic: "358"
+            - generic: "357"
+            - generic: "356"
+            - generic: "355"
+            - generic: "354"
+            - generic: "353"
+            - generic: "352"
+            - generic: "351"
+            - generic: "350"
+            - generic: "349"
+            - generic: "130"
+            - generic: "129"
+            - generic: "26"
+            - generic: "27"
+            - generic: "28"
+            - generic: "29"
+            - generic: "30"
+            - generic: "35"
+            - generic: "34"
+            - generic: "33"
+            - generic: "32"
+            - generic: "31"
+            - generic: "56"
+            - generic: "57"
+            - generic: "58"
+            - generic: "59"
+            - generic: "60"
+            - generic: "65"
+            - generic: "64"
+            - generic: "63"
+            - generic: "62"
+            - generic: "61"
+            - generic: "87"
+            - generic: "88"
+            - generic: "89"
+            - generic: "90"
+            - generic: "91"
+            - generic: "92"
+            - generic: "98"
+            - generic: "97"
+            - generic: "96"
+            - generic: "95"
+            - generic: "94"
+            - generic: "93"
+            - generic: "7"
+            - generic: "8"
+            - generic: "9"
+            - generic: "10"
+            - generic: "4"
+            - generic: "3"
+            - generic: "2"
+            - generic: "1"
+            - generic: "203"
+            - generic: "235"
+            - generic: "236"
+            - generic: "237"
+            - generic: "238"
+            - generic: "239"
+            - generic: "240"
+            - generic: "241"
+            - generic: "242"
+            - generic: "243"
+            - generic: "244"
+            - generic: "245"
+            - generic: "246"
+            - generic: "247"
+            - generic: "248"
+            - generic: "249"
+            - generic: "250"
+            - generic: "251"
+            - generic: "252"
+            - generic: "253"
+            - generic: "254"
+            - generic: "255"
+            - generic: "256"
+            - generic: "257"
+            - generic: "258"
+            - generic: "259"
+            - generic: "260"
+            - generic: "261"
+            - generic: "262"
+            - generic: "263"
+            - generic: "264"
+            - generic: "265"
+            - generic: "266"
+            - generic: "267"
+            - generic: "268"
+            - generic: "204"
+            - generic: "205"
+            - generic: "206"
+            - generic: "170"
+            - generic: "169"
+            - generic: "168"
+            - generic: "167"
+            - generic: "171"
+            - generic: "172"
+            - generic: "173"
+            - generic: "174"
+            - generic: "178"
+            - generic: "177"
+            - generic: "176"
+            - generic: "175"
+            - generic: "179"
+            - generic: "180"
+            - generic: "181"
+            - generic: "182"
+            - generic: "186"
+            - generic: "185"
+            - generic: "184"
+            - generic: "183"
+            - generic: "187"
+            - generic: "188"
+            - generic: "189"
+            - generic: "190"
+            - generic: "194"
+            - generic: "193"
+            - generic: "192"
+            - generic: "191"
+            - generic: "195"
+            - generic: "196"
+            - generic: "197"
+            - generic: "198"
+            - generic: "202"
+            - generic: "201"
+            - generic: "200"
+            - generic: "199"
+            - generic: "210"
+            - generic: "209"
+            - generic: "208"
+            - generic: "207"
+            - generic: "139"
+            - generic: "140"
+            - generic: "141"
+            - generic: "142"
+            - generic: "146"
+            - generic: "145"
+            - generic: "144"
+            - generic: "143"
+            - generic: "147"
+            - generic: "148"
+            - generic: "149"
+            - generic: "150"
+            - generic: "154"
+            - generic: "269"
+            - generic: "270"
+            - generic: "271"
+            - generic: "272"
+            - generic: "273"
+            - generic: "274"
+            - generic: "275"
+            - generic: "276"
+            - generic: "277"
+            - generic: "278"
+            - generic: "279"
+            - generic: "280"
+            - generic: "153"
+            - generic: "152"
+            - generic: "151"
+            - generic: "155"
+            - generic: "156"
+            - generic: "157"
+            - generic: "158"
+            - generic: "162"
+            - generic: "161"
+            - generic: "160"
+            - generic: "159"
+            - generic: "163"
+            - generic: "164"
+            - generic: "165"
+            - generic: "166"
+            - generic: "211"
+            - generic: "212"
+            - generic: "213"
+            - generic: "214"
+            - generic: "218"
+            - generic: "217"
+            - generic: "216"
+            - generic: "215"
+            - generic: "219"
+            - generic: "220"
+            - generic: "221"
+            - generic: "222"
+            - generic: "226"
+            - generic: "225"
+            - generic: "224"
+            - generic: "223"
+            - generic: "227"
+            - generic: "228"
+            - generic: "229"
+            - generic: "230"
+            - generic: "234"
+            - generic: "233"
+            - generic: "232"
+            - generic: "231"
+          - generic:
+            - generic: ซอย 2
+            - generic: ซอย 3
+            - generic: ซอย 4
+            - generic: ซอย 4/1
+            - generic: ซอย 4/3
+            - generic: ซอย 4/4
+            - generic: ซอย 4/2
+            - generic: ซอย 5
+            - generic: ซอย 6
+            - generic: ถนนเมน
+            - generic: ถนนเมน
+            - generic: ซอย 7
+            - generic: ซอย 8
+            - generic: ซอย 9
+            - generic: ซอย 10
+            - generic: ซอย 11
+            - generic: ซอย 12
+            - generic: ซอย 13
+            - generic: ซอย 14
+            - generic: ซอย 15
+            - generic: ซอย 16
+            - generic: ซอย 17
+            - generic: ซอย 18
+            - generic: ซอย 19
+            - generic: ซอย 20
+            - generic: ซอย 21
+            - generic: ซอย 22
+            - generic: ซอย 23
+            - generic: ซอย 24
+            - generic: ซอย 25
+            - generic: ซอย 26
+            - generic: ซอย 27
+            - generic: ซอย 28
+            - generic: ซอย 1
+      - generic: ลากแผนที่เพื่อเลื่อน · ล้อเมาส์ซูม
+      - generic [ref=e105]: z16
+      - generic [ref=e106]:
+        - generic [ref=e107]: ผังโครงการ
+        - slider [ref=e108] [cursor=pointer]: "80"
+        - generic [ref=e110]: หมุน
+        - button "↺" [ref=e111] [cursor=pointer]
+        - generic [ref=e112]: 330°
+        - button "↻" [ref=e113] [cursor=pointer]
+        - button "⊙" [ref=e114] [cursor=pointer]
+      - generic [ref=e115]:
+        - button "+" [ref=e116] [cursor=pointer]
+        - button "−" [ref=e117] [cursor=pointer]
+        - button "พอดีหน้าจอ" [ref=e119] [cursor=pointer]:
+          - img [ref=e120]
+        - button "รีเซ็ต" [ref=e122] [cursor=pointer]:
+          - img [ref=e123]

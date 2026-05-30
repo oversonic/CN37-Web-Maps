@@ -130,6 +130,7 @@
     aside.open{transform:translateX(0)}
     .menu-btn{display:grid;place-items:center;width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--card);cursor:pointer}
     .stat-strip{display:none}.titles h1{font-size:16px}
+    .sb-toggle{display:none!important}
   }
   .scrim{display:none;position:absolute;inset:0;background:rgba(28,36,32,.35);z-index:25}
   .scrim.show{display:block}
@@ -2949,6 +2950,21 @@
     sbToggle.innerHTML=sbOpen?iconOpen:iconClose;
     sbToggle.title=sbOpen?'ยุบเมนู':'เปิดเมนู';
     setTimeout(()=>map.invalidateSize(),300);
+  });
+
+  // Clean up conflicting classes when crossing the mobile/desktop breakpoint
+  const mqMobile = window.matchMedia('(max-width:860px)');
+  mqMobile.addEventListener('change', e=>{
+    if(e.matches){
+      // entering mobile: strip desktop-collapse class so slide animation works
+      sb.classList.remove('sb-hidden');
+    } else {
+      // entering desktop: strip mobile-drawer classes, restore desktop state
+      sb.classList.remove('open');
+      sc.classList.remove('show');
+      sb.classList.toggle('sb-hidden',!sbOpen);
+      setTimeout(()=>map.invalidateSize(),300);
+    }
   });
 
   // ── CCTV cameras ──────────────────────────────────────────────
