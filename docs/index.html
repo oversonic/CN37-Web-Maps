@@ -134,6 +134,11 @@
   .scrim{display:none;position:absolute;inset:0;background:rgba(28,36,32,.35);z-index:25}
   .scrim.show{display:block}
   @media(min-width:861px){.scrim{display:none!important}}
+  #fiber-html-layer{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:visible}
+  #fiber-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  .fiber-dot{width:14px;height:14px;border-radius:3px;background:#f0922e;flex-shrink:0}
+  .jb-icon{width:14px;height:14px;background:#f0922e;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .cab-icon{width:18px;height:18px;background:#2d4a8a;border:2.5px solid #fff;border-radius:4px;box-shadow:0 1px 5px rgba(0,0,0,.45)}
 </style>
 </head>
 <body>
@@ -190,6 +195,18 @@
         <div class="cam-toggle" id="camToggle">
           <div class="ct-left"><span class="cam-dot"></span><span class="ct-lab">แสดงตำแหน่งกล้อง</span></div>
           <span class="cam-count">32<small>ตัว</small></span>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-h">Fiber &amp; Junction Box</div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;padding:2px 6px 10px;font-size:10.5px;color:var(--ink-soft);font-family:'Space Mono',monospace;letter-spacing:.3px">
+          <span style="display:flex;align-items:center;gap:5px"><span style="width:20px;height:3px;background:#2d6bcd;display:inline-block;border-radius:2px"></span>Backbone</span>
+          <span style="display:flex;align-items:center;gap:5px"><span style="width:20px;height:3px;background:#f0922e;display:inline-block;border-radius:2px"></span>Fiber</span>
+          <span style="display:flex;align-items:center;gap:5px"><svg width="20" height="3"><line x1="0" y1="1.5" x2="20" y2="1.5" stroke="#f0922e" stroke-width="2" stroke-dasharray="5,3"/></svg>LAN</span>
+        </div>
+        <div class="cam-toggle" id="fiberToggle">
+          <div class="ct-left"><span class="fiber-dot"></span><span class="ct-lab">สาย Fiber + JB</span></div>
+          <span class="cam-count">16<small>จุด</small></span>
         </div>
       </div>
     </aside>
@@ -2741,6 +2758,9 @@
 
       </div>
       <div id="cam-html-layer"></div>
+      <div id="fiber-html-layer">
+        <svg id="fiber-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
       <div class="hint" id="hint">ลากแผนที่เพื่อเลื่อน · ล้อเมาส์ซูม</div>
       <div class="zoom-badge" id="zoomBadge">z16</div>
       <div class="opacity-ctrl">
@@ -2970,6 +2990,117 @@
       document.getElementById('camToggle').style.opacity = visible ? 1 : .4;
     });
   }
+
+  // ── Fiber & Junction Box layer ─────────────────────────────────
+  function renderFiber(){
+    const layer = document.getElementById('fiber-html-layer');
+    const fsvg  = document.getElementById('fiber-svg');
+    const tip   = document.getElementById('tip');
+    const NS    = 'http://www.w3.org/2000/svg';
+
+    // ── Backbone routes (ไม่ผ่าน JB) ──────────────────────────────
+    const BB_FRONT_OFFICE = [L.latLng(13.9180573,100.5866030), L.latLng(13.9166364,100.5910274)];
+    const BB_OFFICE_BACK  = [L.latLng(13.9166364,100.5910274), L.latLng(13.9143259,100.5952891)];
+
+    // ── Camera chains by zone ────────────────────────────────────
+    // Zone A — fiber: MDF-FRONT → N2 only
+    const CA_N = [L.latLng(13.9180573,100.5866030),L.latLng(13.9173318,100.5872405)];
+    // Zone B — from CORE-OFFICE (N3-N7 west / N8 east / S4-S6 east)
+    const CB_NW= [L.latLng(13.9166364,100.5910274),L.latLng(13.9165907,100.5899412),L.latLng(13.9167940,100.5893473),L.latLng(13.9171123,100.5886572),L.latLng(13.9173760,100.5880829)];
+    const CB_NE= [L.latLng(13.9166364,100.5910274),L.latLng(13.9164016,100.5915601)];
+    const CB_SE= [L.latLng(13.9166364,100.5910274),L.latLng(13.9158557,100.5916708),L.latLng(13.9155979,100.5922991),L.latLng(13.9153481,100.5929365)];
+    // Zone C — from IDF-BACK (S7-S9)
+    const CC_S = [L.latLng(13.9143259,100.5952891),L.latLng(13.9144904,100.5949855),L.latLng(13.9148164,100.5942587),L.latLng(13.9150801,100.5936094)];
+    // LAN (Cat6) cross-connect N2 → S2 (~38m)
+    const LAN_CROSS = [L.latLng(13.9173318,100.5872405),L.latLng(13.9170297,100.5870777)];
+
+    function makeLine(color, width, dash){
+      const el = document.createElementNS(NS,'polyline');
+      el.setAttribute('stroke', color);
+      el.setAttribute('stroke-width', width);
+      el.setAttribute('stroke-opacity','0.92');
+      el.setAttribute('stroke-linecap','round');
+      el.setAttribute('stroke-linejoin','round');
+      el.setAttribute('fill','none');
+      if(dash) el.setAttribute('stroke-dasharray', dash);
+      fsvg.appendChild(el);
+      return el;
+    }
+    const bbLines  = [makeLine('#2d6bcd','4'), makeLine('#2d6bcd','4')];
+    const camLines = [makeLine('#f0922e','2.5'), makeLine('#f0922e','2.5'),
+                      makeLine('#f0922e','2.5'), makeLine('#f0922e','2.5'),
+                      makeLine('#f0922e','2.5')];
+    const lanLines = [makeLine('#f0922e','2','6,4')];
+    const BB_ROUTES  = [BB_FRONT_OFFICE, BB_OFFICE_BACK];
+    const CAM_ROUTES = [CA_N, CB_NW, CB_NE, CB_SE, CC_S];
+    const LAN_ROUTES = [LAN_CROSS];
+
+    const CABINETS = [
+      {id:'MDF-FRONT',  label:'ป้อมหน้า | CAM-01,02,03,05,06',  ll:L.latLng(13.9180573,100.5866030)},
+      {id:'CORE-OFFICE',label:'สำนักงาน | CAM-17,18',            ll:L.latLng(13.9166364,100.5910274)},
+      {id:'IDF-BACK',   label:'ป้อมหลัง | CAM-28,29,30,32',     ll:L.latLng(13.9143259,100.5952891)},
+    ];
+    const JBS = [
+      {id:'JB-N2',ll:L.latLng(13.9173318,100.5872405),cams:'CAM-04,31'},
+      {id:'JB-N3',ll:L.latLng(13.9173760,100.5880829),cams:'CAM-11'},
+      {id:'JB-N5',ll:L.latLng(13.9171123,100.5886572),cams:'CAM-12'},
+      {id:'JB-N6',ll:L.latLng(13.9167940,100.5893473),cams:'CAM-13'},
+      {id:'JB-N7',ll:L.latLng(13.9165907,100.5899412),cams:'CAM-14'},
+      {id:'JB-N8',ll:L.latLng(13.9164016,100.5915601),cams:'CAM-19,20'},
+      {id:'JB-S2',ll:L.latLng(13.9170297,100.5870777),cams:'CAM-09,10'},
+      {id:'JB-S4',ll:L.latLng(13.9158557,100.5916708),cams:'CAM-21'},
+      {id:'JB-S5',ll:L.latLng(13.9155979,100.5922991),cams:'CAM-22'},
+      {id:'JB-S6',ll:L.latLng(13.9153481,100.5929365),cams:'CAM-23'},
+      {id:'JB-S7',ll:L.latLng(13.9150801,100.5936094),cams:'CAM-24'},
+      {id:'JB-S8',ll:L.latLng(13.9148164,100.5942587),cams:'CAM-25'},
+      {id:'JB-S9',ll:L.latLng(13.9144904,100.5949855),cams:'CAM-26,27'},
+    ];
+
+    function makeMarker(label, cls){
+      const el = document.createElement('div');
+      el.style.cssText = 'position:absolute;pointer-events:auto;transform:translate(-50%,-50%);cursor:pointer';
+      el.innerHTML = `<div class="${cls}"></div>`;
+      el.addEventListener('mouseenter', e=>{
+        tip.style.opacity='1';
+        tip.style.left=e.clientX+'px';
+        tip.style.top=(e.clientY-26)+'px';
+        tip.textContent=label;
+      });
+      el.addEventListener('mouseleave',()=>tip.style.opacity='0');
+      layer.appendChild(el);
+      return el;
+    }
+
+    const cabEls = CABINETS.map(c=>({el:makeMarker(c.id+' | '+c.label,'cab-icon'),ll:c.ll}));
+    const jbEls  = JBS.map(j=>({el:makeMarker(j.id+' | '+j.cams,'jb-icon'),ll:j.ll}));
+
+    function pts(coords){
+      return coords.map(ll=>{const p=map.latLngToContainerPoint(ll);return p.x+','+p.y;}).join(' ');
+    }
+    function syncFiber(){
+      bbLines.forEach( (ln,i)=>ln.setAttribute('points',pts(BB_ROUTES[i])));
+      camLines.forEach((ln,i)=>ln.setAttribute('points',pts(CAM_ROUTES[i])));
+      lanLines.forEach((ln,i)=>ln.setAttribute('points',pts(LAN_ROUTES[i])));
+      [...cabEls,...jbEls].forEach(({el,ll})=>{
+        const p=map.latLngToContainerPoint(ll);
+        el.style.left=p.x+'px';
+        el.style.top=p.y+'px';
+      });
+    }
+
+    map.on('move zoom viewreset',syncFiber);
+    const _orig=window._updateCamPos;
+    window._updateCamPos=()=>{_orig&&_orig();syncFiber();};
+    syncFiber();
+
+    let visible=true;
+    document.getElementById('fiberToggle').addEventListener('click',()=>{
+      visible=!visible;
+      layer.style.display=visible?'':'none';
+      document.getElementById('fiberToggle').style.opacity=visible?1:.4;
+    });
+  }
+  renderFiber();
 
   renderCams();
   setTimeout(()=>hint.style.opacity='0',4500);
