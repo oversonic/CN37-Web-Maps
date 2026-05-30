@@ -1,0 +1,33 @@
+id,type,name,latitude,longitude,source,accuracy_m,notes
+CAM-01,cctv,CAM-01,13.9183914,100.5866408,KML_TheConnect_cctv,exact,ป้อมหน้า บริเวณ - ฝั่งเหนือถนนเมน ซอย 1
+CAM-02,cctv,CAM-02,13.9180223,100.5866435,KML_TheConnect_cctv,exact,ป้อมหน้า บริเวณ - ฝั่งใต้ถนนเมน ซอย 1
+CAM-03,cctv,CAM-03,13.9179827,100.5865979,KML_TheConnect_cctv,exact,ป้อมหน้า บริเวณ - ใกล้ป้อม รปภ. ป้อมหน้า
+CAM-04,cctv,CAM-04,13.9173318,100.5872405,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 2-3
+CAM-05,cctv,CAM-05,13.9180704,100.5866123,KML_TheConnect_cctv,exact,ป้อมหน้า บริเวณ - ฝั่งใต้ถนนเมน
+CAM-06,cctv,CAM-06,13.9178723,100.5868364,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 1-2
+CAM-07,cctv,CAM-07,13.9178112,100.5873983,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 3
+CAM-08,cctv,CAM-08,13.9176448,100.5873826,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 3
+CAM-09,cctv,CAM-09,13.9170235,100.5870919,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 2
+CAM-10,cctv,CAM-10,13.9170358,100.5870634,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 2 (ใกล้ CAM-09)
+CAM-11,cctv,CAM-11,13.917376,100.5880829,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 5
+CAM-12,cctv,CAM-12,13.9171123,100.5886572,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 6
+CAM-13,cctv,CAM-13,13.916794,100.5893473,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 7-8
+CAM-14,cctv,CAM-14,13.9165907,100.5899412,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 9-10
+CAM-15,cctv,CAM-15,13.9170277,100.5879302,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 4-5
+CAM-16,cctv,CAM-16,13.9167146,100.5877985,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 4-5
+CAM-17,cctv,CAM-17,13.9161547,100.5909385,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 10-11
+CAM-18,cctv,CAM-18,13.9166364,100.5910274,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ใกล้สำนักงานนิติบุคคล
+CAM-19,cctv,CAM-19,13.9164359,100.5915311,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 12-13
+CAM-20,cctv,CAM-20,13.9163673,100.591589,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 13 (ใกล้ CAM-19)
+CAM-21,cctv,CAM-21,13.9158557,100.5916708,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 13-14
+CAM-22,cctv,CAM-22,13.9155979,100.5922991,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 15-16
+CAM-23,cctv,CAM-23,13.9153481,100.5929365,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 17-18
+CAM-24,cctv,CAM-24,13.9150801,100.5936094,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 20-21
+CAM-25,cctv,CAM-25,13.9148164,100.5942587,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 22-23
+CAM-26,cctv,CAM-26,13.9145549,100.5949288,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 25-26
+CAM-27,cctv,CAM-27,13.9144259,100.5950422,KML_TheConnect_cctv,exact,ถนนเมนฝั่งใต้ ช่วงซอย 26 (ใกล้ป้อมหลัง)
+CAM-28,cctv,CAM-28,13.9145895,100.5951488,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 27 (ใกล้ป้อมหลัง)
+CAM-29,cctv,CAM-29,13.9143441,100.5952765,KML_TheConnect_cctv,exact,ป้อมหลัง บริเวณ - ฝั่งใต้
+CAM-30,cctv,CAM-30,13.9144368,100.5953814,KML_TheConnect_cctv,exact,ป้อมหลัง บริเวณ - ฝั่งเหนือ
+CAM-31,cctv,CAM-31 (Point 31),13.9173418,100.587219,KML_TheConnect_cctv,exact,ถนนเมนฝั่งเหนือ ช่วงซอย 3-4
+CAM-32,cctv,CAM-32 (Point 32),13.9143183,100.5952363,KML_TheConnect_cctv,exact,ป้อมหลัง บริเวณ - (ใกล้ CAM-29/30)

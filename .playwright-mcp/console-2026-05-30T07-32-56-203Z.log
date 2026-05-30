@@ -1,0 +1,3 @@
+[     123ms] TypeError: fit is not a function
+    at http://localhost:8765/CN37_masterplan_inline.html:2902:3
+    at http://localhost:8765/CN37_masterplan_inline.html:2905:3
