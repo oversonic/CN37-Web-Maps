@@ -14,6 +14,9 @@ Interactive map viewer for the CN37 housing project (โครงการ CN37)
 | `CN37_masterplan.html` | Legacy version (loads SVG via fetch, kept for reference) |
 | `CN37_MasterPlan3_cctv.svg` | Source SVG from Adobe Illustrator (not loaded at runtime) |
 | `CNfiber_coordinates_v2.csv` | GPS coordinates of all 32 CCTV cameras (source of truth) |
+| `CCTV_DESIGN.md` | CCTV & fiber infrastructure design — topology, zones, BOM, VLAN |
+| `COST_ESTIMATE.md` | Equipment price estimate (ราคาตลาดไทย 2025, ไม่รวมค่าแรง) |
+| `CN37_CCTV_Design.docx` | Word document สรุปการออกแบบ CCTV ครบทุกหัวข้อ |
 
 ## Running
 
@@ -111,4 +114,6 @@ Removed at build time: `spece`, `line2Outline`, `EleT`, `ELeLine`, `EleTxt` (all
 
 ## CCTV Installation Design
 
-See [`CCTV_DESIGN.md`](CCTV_DESIGN.md) — fiber backbone, junction box layout (20 nodes), BOM, per-pole power, and VLAN design.
+See [`CCTV_DESIGN.md`](CCTV_DESIGN.md) — fiber backbone, junction box layout, BOM, per-pole power, and VLAN design.
+
+See [`COST_ESTIMATE.md`](COST_ESTIMATE.md) — equipment price estimate breakdown by category (ราคาตลาดไทย 2025, ไม่รวมค่าแรงติดตั้ง)

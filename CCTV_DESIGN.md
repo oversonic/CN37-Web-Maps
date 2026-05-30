@@ -191,9 +191,9 @@ IDF-BACK
 | ELCB 10A + Surge Protector SPD II | **17 ชุด** | |
 | Managed Switch 8-port PoE + 3 SFP | **2 ชุด** | MDF-FRONT, IDF-BACK |
 | Managed Switch 16-port PoE + 5 SFP | **1 ชุด** | CORE-OFFICE |
-| NVR 16ch | **3 ชุด** | |
-| UPS 1500VA | **2 ชุด** | MDF-FRONT, IDF-BACK |
-| UPS 3000VA | **1 ชุด** | CORE-OFFICE |
+| NVR 32ch | **1 ชุด** | CORE-OFFICE เท่านั้น — รับกล้องทั้ง 32 ตัว |
+| UPS 1000VA | **2 ชุด** | MDF-FRONT, IDF-BACK (ไม่มี NVR แล้ว) |
+| UPS 3000VA | **1 ชุด** | CORE-OFFICE (Switch + NVR 32ch + Server) |
 
 ---
 
