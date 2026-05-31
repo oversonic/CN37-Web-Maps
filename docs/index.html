@@ -145,6 +145,7 @@
   .fiber-dot{width:14px;height:14px;border-radius:3px;background:#f0922e;flex-shrink:0}
   .jb-icon{width:14px;height:14px;background:#f0922e;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.35)}
   .cab-icon{width:18px;height:18px;background:#2d4a8a;border:2.5px solid #fff;border-radius:4px;box-shadow:0 1px 5px rgba(0,0,0,.45)}
+  .tf-icon{width:18px;height:18px;background:#F1C40F;border:2.5px solid #17386D;border-radius:3px;flex-shrink:0;box-shadow:0 1px 5px rgba(0,0,0,.45);display:grid;place-items:center;font-size:9px;font-weight:700;color:#17386D;font-family:'Space Mono',monospace}
   .zone-label{display:flex;flex-direction:column;align-items:center;transform:translate(-50%,-50%);
     background:rgba(20,28,24,.76);color:#fbfcfa;border-radius:8px;padding:4px 8px;
     white-space:nowrap;pointer-events:none;font-family:"IBM Plex Sans Thai",sans-serif;
@@ -236,6 +237,23 @@
             <span class="ct-lab">แสดงเขต 10 เขต</span>
           </div>
           <span class="cam-count">10<small>เขต</small></span>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-h">ไฟฟ้า</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;padding:2px 6px 10px;font-size:10px;color:var(--ink-soft);font-family:'Space Mono',monospace;letter-spacing:.2px">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:18px;height:3px;background:#5BE00E;display:inline-block;border-radius:2px"></span>L1/1, L5/1</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:18px;height:3px;background:#F2DF30;display:inline-block;border-radius:2px"></span>L1/2, L4/2</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:18px;height:3px;background:#EF3B0A;display:inline-block;border-radius:2px"></span>L2/2, L3/1, L5/2</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:18px;height:3px;background:#F79A2B;display:inline-block;border-radius:2px"></span>L3/2</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:18px;height:3px;background:#21EDF7;display:inline-block;border-radius:2px"></span>L2/1, L4/1</span>
+        </div>
+        <div class="cam-toggle" id="eleToggle">
+          <div class="ct-left">
+            <span class="ct-swatch" style="background:linear-gradient(to right,#5BE00E,#F2DF30,#21EDF7,#EF3B0A,#F79A2B);border-radius:3px"></span>
+            <span class="ct-lab">สายไฟ + หม้อแปลง</span>
+          </div>
+          <span class="cam-count">5<small>TF</small></span>
         </div>
       </div>
     </aside>
@@ -2791,6 +2809,9 @@
       <div id="fiber-html-layer">
         <svg id="fiber-svg" xmlns="http://www.w3.org/2000/svg"></svg>
       </div>
+      <div id="ele-html-layer" style="position:absolute;inset:0;z-index:3;pointer-events:none;overflow:visible;display:none">
+        <svg id="ele-svg" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
       <div class="hint" id="hint">ลากแผนที่เพื่อเลื่อน · ล้อเมาส์ซูม</div>
       <div class="zoom-badge" id="zoomBadge">z16</div>
       <div class="opacity-ctrl">
@@ -3271,6 +3292,159 @@
     });
   }
   renderFiber();
+
+  // ── Electrical wiring layer ─────────────────────────────────────
+  function renderElectrical(){
+    // Same source-SVG → GPS transform as zones (y+27 vs inline SVG)
+    const a=-8.35024e-7, b=-2.002355e-6, tx=13.9199832, ty=100.5869337;
+    function s2ll(x,y){ return L.latLng(a*x+b*y+tx, -b*x+a*y+ty); }
+    function r(pts){ return pts.map(([x,y])=>s2ll(x,y)); }
+
+    // Circuits: label, color, routes (each route = array of [x,y] source-SVG coords)
+    const CIRCUITS=[
+      {label:'L1/1', color:'#5BE00E', routes:[
+        [[607.167,815.872],[231,814.944],[231,678]],
+        [[372,679],[372,815]],[[537,675],[537,816]],
+        [[607.167,815.872],[558.003,867]],
+        [[558,867],[260,867]],[[558,867],[935,867]],
+        [[592,867],[592,995]],[[592,995],[548.255,1002.334]],
+        [[548.255,1002.334],[242,1005]],
+      ]},
+      {label:'L5/1', color:'#5BE00E', routes:[
+        [[3661.056,827.887],[3054.173,829.01]],
+        [[3634,825],[3634,868]],
+        [[3634,868],[3130.173,871.602]],
+        [[3634,868],[4397.188,849.666]],
+        [[3119.334,828.448],[3113.25,658.5]],
+        [[3278.334,828.448],[3275.18,657.602]],
+        [[3440,825],[3440,661]],[[3600.334,825],[3598.334,661]],
+      ]},
+      {label:'L1/2', color:'#F2DF30', routes:[
+        [[654,816],[694,816],[694.173,669.602]],
+        [[847,671],[847,815.572],[691.827,815.761]],
+        [[847,816],[879,816]],
+      ]},
+      {label:'L4/2', color:'#F2DF30', routes:[
+        [[2473,828],[2951,828]],
+        [[2628,828],[2628,665]],
+        [[2789,826.174],[2788.333,656.602]],
+        [[2951,828],[2951,659]],
+      ]},
+      {label:'L3/1', color:'#EF3B0A', routes:[
+        [[1232,817],[886,817]],
+        [[1010,815],[1010,684]],[[1164,816],[1164,685]],
+      ]},
+      {label:'L2/2', color:'#EF3B0A', routes:[
+        [[594.998,1114],[592,1184.531]],
+        [[592,1185],[1372,1185]],[[592,1185],[301.013,1184.531]],
+      ]},
+      {label:'L5/2', color:'#EF3B0A', routes:[
+        [[3704.5,818.438],[4485.827,805.345]],
+        [[3758,816],[3758,654]],[[3917.001,811.891],[3915.75,650.5]],
+        [[4083,811],[4083,643]],[[4243.665,809.14],[4240.173,644.486]],
+        [[4408,807],[4408,638]],
+        [[4485.827,805.345],[4516.001,816.171]],
+        [[4516.001,816.171],[4566.5,773.479]],
+        [[4566.5,773.479],[4581,630.602]],
+      ]},
+      {label:'L3/2', color:'#F79A2B', routes:[
+        [[1285,817],[2257,817]],
+        [[1361.188,821.438],[1372.293,869.602]],
+        [[2290,870],[955,870]],
+        [[1318,816],[1318,685]],[[1482,813],[1482,685]],
+        [[1633.18,813],[1633.013,678.602]],
+        [[1783,815],[1783,675]],
+        [[1944.188,813],[1945.168,671.25]],
+        [[2111.667,815],[2112.333,669]],
+        [[2257,817],[2309.709,793.993]],
+        [[2310,794],[2310,672]],
+      ]},
+      {label:'L2/1', color:'#21EDF7', routes:[
+        [[592,1075],[592,1034]],
+        [[592,1034],[609.008,997.5]],
+        [[609,1002],[1361,1002]],
+      ]},
+      {label:'L4/1', color:'#21EDF7', routes:[
+        [[2440,836],[2369,836]],
+        [[2369,836],[2355.253,873.493]],
+        [[2355,873],[3113,873]],
+      ]},
+    ];
+
+    // 5 transformers (rect centers from EleT layer, source SVG coords)
+    const TRANSFORMERS=[
+      {id:'TF-1', xy:[632.5,831.5]},
+      {id:'TF-2', xy:[585.5,1097.5]},
+      {id:'TF-3', xy:[1254.5,830.5]},
+      {id:'TF-4', xy:[2473.5,835.5]},
+      {id:'TF-5', xy:[3682.5,828.5]},
+    ];
+
+    const layer=document.getElementById('ele-html-layer');
+    const esvg =document.getElementById('ele-svg');
+    const tip  =document.getElementById('tip');
+    const NS   ='http://www.w3.org/2000/svg';
+
+    // Pre-convert all route points to GPS
+    const lineData=[];
+    CIRCUITS.forEach(c=>{
+      c.routes.forEach(route=>{
+        const lls=r(route);
+        const el=document.createElementNS(NS,'polyline');
+        el.setAttribute('stroke',c.color);
+        el.setAttribute('stroke-width','3');
+        el.setAttribute('stroke-opacity','0.9');
+        el.setAttribute('stroke-linecap','round');
+        el.setAttribute('stroke-linejoin','round');
+        el.setAttribute('fill','none');
+        esvg.appendChild(el);
+        lineData.push({el,lls});
+      });
+    });
+
+    // Transformer markers
+    const tfData=TRANSFORMERS.map(tf=>{
+      const ll=s2ll(...tf.xy);
+      const el=document.createElement('div');
+      el.style.cssText='position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer';
+      el.innerHTML=`<div class="tf-icon">TF</div>`;
+      el.addEventListener('mouseenter',e=>{
+        tip.style.opacity='1';
+        tip.style.left=e.clientX+'px';
+        tip.style.top=(e.clientY-26)+'px';
+        tip.textContent=tf.id;
+      });
+      el.addEventListener('mouseleave',()=>tip.style.opacity='0');
+      layer.appendChild(el);
+      return {el,ll};
+    });
+
+    function ptsStr(lls){
+      return lls.map(ll=>{const p=map.latLngToContainerPoint(ll);return p.x+','+p.y;}).join(' ');
+    }
+    function syncEle(){
+      lineData.forEach(({el,lls})=>el.setAttribute('points',ptsStr(lls)));
+      tfData.forEach(({el,ll})=>{
+        const p=map.latLngToContainerPoint(ll);
+        el.style.left=p.x+'px'; el.style.top=p.y+'px';
+      });
+    }
+
+    map.on('move zoom viewreset',syncEle);
+    const _prev=window._updateCamPos;
+    window._updateCamPos=()=>{_prev&&_prev();syncEle();};
+
+    let visible=false;
+    const tog=document.getElementById('eleToggle');
+    tog.style.opacity=.4;
+    tog.addEventListener('click',()=>{
+      visible=!visible;
+      layer.style.display=visible?'':'none';
+      tog.style.opacity=visible?1:.4;
+      if(visible) syncEle();
+    });
+  }
+  renderElectrical();
 
   renderCams();
   setTimeout(()=>hint.style.opacity='0',4500);
